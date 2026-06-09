@@ -1,0 +1,14 @@
+
+
+metadata:
+  database: "Web of Science Core Collection"
+  topic: "二维过渡金属氧化物异质结相关文献"
+  version: "1.0"
+
+constraints:
+  time_window: [2012, 2025]
+  export_format: ["CSV", "Plain Text"]
+
+# 从 image_36c920.png 提取的完整布尔检索式
+query_string: >-
+  ((("2D" OR "two-dimensional" OR monolayer OR ultrathin) AND ("transition metal oxide" OR TMO OR TMOs OR TiO2 OR WO3 OR MoO3 OR NiO OR Co3O4 OR MnO2)) AND (heterojunction OR heterostructure OR "2D/2D heterostructure" OR "van der Waals heterojunction" OR "Z-scheme" OR "type-II heterostructure"))
