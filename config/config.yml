@@ -1,0 +1,53 @@
+# ===================== 二维过渡金属氧化物异质结 项目全局配置 =====================
+# 编码、基础通用设置
+basic:
+  encoding: "utf-8"          # 全局文件编码
+  split_char: ";"            # 作者/参考文献分隔符(WOS标准分号)
+  min_text_len: 4            # 过滤短无效文本阈值
+
+# 一、文件路径配置
+paths:
+  raw_data: "../data/raw/wos_raw.csv"          # 原始WOS数据
+  clean_data: "../data/processed/clean_wos.csv"# 清洗后数据
+  table_out: "../outputs/tables"               # 表格输出目录
+  figure_out: "../outputs/figures"            # 图谱图片输出目录
+
+# 二、数据清洗参数
+data_clean:
+  drop_empty_doi: true       # 缺失DOI则删除该行
+  drop_empty_cr: true        # 缺失参考文献则删除该行
+  dedup_by_doi: true         # 基于DOI去重
+
+# 三、Python分析核心参数
+analysis:
+  # 共被引分析参数 (co_citation.py)
+  co_citation:
+    min_ref_cite: 5          # 参考文献最低被引频次
+    sim_method: "cosine"     # 相似度算法：余弦相似度
+    cluster_alg: "louvain"   # 聚类算法
+    q_threshold: 0.3         # 模块度判定标准(Q>0.3有效)
+
+  # 文献耦合 + 作者合作 (coupling_or_collab.py)
+  coupling_collab:
+    min_couple_link: 3       # 文献最小耦合连接数
+    author_min_paper: 3      # 作者最低发文量
+
+  # 中心性计算参数
+  centrality:
+    between_sample: 100      # 中介中心性抽样数
+    eigen_iter: 500          # 特征向量迭代次数
+
+# 四、VOSviewer可视化专用参数（图谱阈值）
+visual:
+  author_network:
+    min_doc: 3               # 作者最低发文数
+  keyword_cooc:
+    min_occur: 5             # 关键词最低出现次数
+  co_cite_map:
+    min_cite: 4              # 参考文献最低被引
+  bib_couple_map:
+    min_link: 3              # 文献最小耦合连线
+
+# 五、版本备注
+version: "v1.0"
+note: "适配WOS双字母字段 DI/CR/AF，稀疏矩阵防内存溢出"
